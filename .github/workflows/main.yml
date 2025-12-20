@@ -1,4 +1,4 @@
-name: 𝐌𝐚𝐜 𝐓𝐕 Auto-Update
+name: MacTV Telugu Update
 
 on:
   schedule:
@@ -18,21 +18,15 @@ jobs:
           python-version: '3.9'
 
       - name: Install Dependencies
-        run: pip install requests pytz
+        run: pip install requests pytz  # <--- CRITICAL FIX
 
       - name: Run Fetcher
         run: python mactom3u.py
-
-      - name: Update README Timestamp
-        run: |
-          IST_DATE=$(TZ='Asia/Kolkata' date +'%d-%m-%Y %I:%M %p')
-          # This replaces the placeholder in your README
-          sed -i "s/LAST_UPDATED_HERE/$IST_DATE IST/g" README.md || echo "README update skipped"
 
       - name: Deploy Update
         run: |
           git config --local user.email "bot@tvtelugu.com"
           git config --local user.name "tvtelugu-bot"
-          git add Live.m3u README.md
+          git add Live.m3u
           git commit -m "Playlist Updated: $(date)" || echo "No changes"
           git push
