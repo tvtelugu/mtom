@@ -24,13 +24,9 @@ def normalize_name(name):
     name = re.sub(r'\b(FHD|HD|SD|UHD|4K)\b', '', name, flags=re.IGNORECASE)
     name = re.sub(r'[\(\[\]\)]', '', name)
     name = ' '.join(name.split()).lower().strip()
-    
     if "maa" in name:
         sub = name.replace("star", "").replace("maa", "").replace("tv", "").strip()
         return f"star maa {sub}".strip()
-    if "ntv" in name: return "ntv telugu"
-    if "history tv18" in name: return "history tv18 hd telugu"
-    if "vanitha" in name: return "vanitha"
     return name
 
 def get_master_logo_db():
@@ -59,7 +55,6 @@ def clean_url(raw_cmd):
 
 def run_sync():
     logo_db = get_master_logo_db()
-    # Ensure Timezone is IST
     ist = pytz.timezone('Asia/Kolkata')
     curr_time = datetime.now(ist).strftime('%d-%m-%Y %I:%M %p')
     
@@ -67,7 +62,6 @@ def run_sync():
     session = requests.Session()
     
     try:
-        print(f"[*] Starting Sync for {POWERED_BY}...")
         auth = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers).json()
         token = auth.get('js', {}).get('token')
         session.headers.update({'Authorization': f'Bearer {token}'})
@@ -81,45 +75,35 @@ def run_sync():
         for ch in (channels or []):
             p_name = ch.get('name', '')
             norm = normalize_name(p_name)
-            
             if "telugu" in p_name.lower() or "telugu" in str(ch.get('tv_genre_id', '')):
                 if norm in seen_keys: continue
-                
                 url = clean_url(ch.get('cmd', ''))
                 if not url: continue
-
                 final_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', p_name, flags=re.IGNORECASE).strip()
                 final_logo = ch.get('logo', '')
                 final_id = ch.get('xmltv_id', '')
-
                 if norm in logo_db:
                     final_name = logo_db[norm]['name']
-                    if "maa" in norm and "star" not in final_name.lower():
-                        final_name = f"Star {final_name}"
+                    if "maa" in norm and "star" not in final_name.lower(): final_name = f"Star {final_name}"
                     final_logo = logo_db[norm]['logo']
                     if logo_db[norm]['id']: final_id = logo_db[norm]['id']
-
-                entry = (f'#EXTINF:-1 tvg-id="{final_id}" tvg-name="{final_name}" '
-                         f'tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n{url}')
                 
-                m3u_entries.append(entry)
+                m3u_entries.append(f'#EXTINF:-1 tvg-id="{final_id}" tvg-name="{final_name}" tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n{url}')
                 seen_keys.add(norm)
 
-        if m3u_entries:
-            m3u_entries.sort(key=lambda x: x.split(",")[-1].strip().lower())
+        m3u_entries.sort(key=lambda x: x.split(",")[-1].strip().lower())
+
+        with open("Live.m3u", "w", encoding="utf-8") as f:
+            f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
+            # 1. VISIBLE INFO CHANNEL AT TOP
+            f.write(f'#EXTINF:-1 tvg-id="0" tvg-logo="https://i.imgur.com/8N69fS7.png" group-title="INFO", --- {POWERED_BY} ---\nhttp://0.0.0.0\n')
+            f.write(f'#EXTINF:-1 tvg-id="0" tvg-logo="https://i.imgur.com/8N69fS7.png" group-title="INFO", Last Update: {curr_time}\nhttp://0.0.0.0\n\n')
+            # 2. BRANDING COMMENTS
+            f.write(f'# POWERED BY: {POWERED_BY}\n')
+            f.write(f'# LAST UPDATED: {curr_time} IST\n\n')
+            f.write("\n".join(m3u_entries))
             
-            # --- WRITING THE FILE WITH VISIBLE BRANDING ---
-            with open("Live.m3u", "w", encoding="utf-8") as f:
-                # Add branding directly into the EXTM3U tag so it's visible in some players
-                f.write(f'#EXTM3U x-tvg-url="{EPG_URL}" description="Powered By {POWERED_BY} | Updated: {curr_time}"\n')
-                # Explicit comment lines
-                f.write(f'# POWERED BY: {POWERED_BY}\n')
-                f.write(f'# LAST UPDATED: {curr_time} IST\n\n')
-                f.write("\n".join(m3u_entries))
-            
-            print(f"[SUCCESS] Live.m3u created with {len(m3u_entries)} channels.")
-            print(f"[@] Timestamp: {curr_time}")
-            
+        print(f"[SUCCESS] Updated: {curr_time}")
     except Exception as e: print(f"[-] Error: {e}")
 
 if __name__ == "__main__":
