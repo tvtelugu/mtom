@@ -24,13 +24,19 @@ def normalize_name(name):
     name = re.sub(r'\b(FHD|HD|SD|UHD|4K)\b', '', name, flags=re.IGNORECASE)
     name = re.sub(r'[\(\[\]\)]', '', name)
     name = ' '.join(name.split()).lower().strip()
+    
     if "maa" in name:
-        sub = name.replace("star", "").replace("maa", "").replace("tv", "").strip()
-        return f"star maa {sub}".strip()
+        sub_type = name.replace("star", "").replace("maa", "").replace("tv", "").strip()
+        if not sub_type: return "star maa"
+        return f"star maa {sub_type}"
+    
+    if "history tv18" in name or "history tv 18" in name: return "history tv18 hd telugu"
+    if "vanitha" in name: return "vanitha"
     return name
 
 def get_master_logo_db():
     db = {}
+    print("[*] Building Master Logo Database...")
     sources = [("TATA", SOURCE_TATA, "json"), ("JIO1", SOURCE_JIO1, "m3u"), ("JIO2", SOURCE_JIO2, "m3u")]
     for name, url, fmt in sources:
         try:
@@ -55,17 +61,22 @@ def clean_url(raw_cmd):
 
 def run_sync():
     logo_db = get_master_logo_db()
+    
+    # --- DYNAMIC TIMESTAMP WITH MONTH NAME ---
     ist = pytz.timezone('Asia/Kolkata')
-    curr_time = datetime.now(ist).strftime('%d-%m-%Y %I:%M %p')
+    # %B = Month Name, %d = Day, %Y = Year, %I:%M %p = 12hr Time
+    curr_time = datetime.now(ist).strftime('%d %B %Y | %I:%M %p')
     
     headers = {'User-Agent': USER_AGENT, 'X-User-Agent': 'Model: MAG250', 'Cookie': f'mac={MAC_ADDR}'}
     session = requests.Session()
     
     try:
+        print("[*] Portal Handshake...")
         auth = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers).json()
         token = auth.get('js', {}).get('token')
-        session.headers.update({'Authorization': f'Bearer {token}'})
+        session.headers.update({'Authorization': f'Bearer {token}', 'User-Agent': USER_AGENT, 'Cookie': f'mac={MAC_ADDR}'})
 
+        print("[*] Fetching Channels...")
         ch_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
         channels = ch_resp.get('js', {}).get('data', [])
 
@@ -75,35 +86,45 @@ def run_sync():
         for ch in (channels or []):
             p_name = ch.get('name', '')
             norm = normalize_name(p_name)
+            
             if "telugu" in p_name.lower() or "telugu" in str(ch.get('tv_genre_id', '')):
                 if norm in seen_keys: continue
                 url = clean_url(ch.get('cmd', ''))
                 if not url: continue
+
                 final_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', p_name, flags=re.IGNORECASE).strip()
                 final_logo = ch.get('logo', '')
                 final_id = ch.get('xmltv_id', '')
+
                 if norm in logo_db:
                     final_name = logo_db[norm]['name']
-                    if "maa" in norm and "star" not in final_name.lower(): final_name = f"Star {final_name}"
+                    if "maa" in norm and "star" not in final_name.lower():
+                        final_name = f"Star {final_name}"
                     final_logo = logo_db[norm]['logo']
                     if logo_db[norm]['id']: final_id = logo_db[norm]['id']
+
+                entry = (f'#EXTINF:-1 tvg-id="{final_id}" tvg-name="{final_name}" '
+                         f'tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n{url}')
                 
-                m3u_entries.append(f'#EXTINF:-1 tvg-id="{final_id}" tvg-name="{final_name}" tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n{url}')
+                m3u_entries.append(entry)
                 seen_keys.add(norm)
 
-        m3u_entries.sort(key=lambda x: x.split(",")[-1].strip().lower())
-
-        with open("Live.m3u", "w", encoding="utf-8") as f:
-            f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
-            # 1. VISIBLE INFO CHANNEL AT TOP
-            f.write(f'#EXTINF:-1 tvg-id="0" tvg-logo="https://i.imgur.com/8N69fS7.png" group-title="INFO", --- {POWERED_BY} ---\nhttp://0.0.0.0\n')
-            f.write(f'#EXTINF:-1 tvg-id="0" tvg-logo="https://i.imgur.com/8N69fS7.png" group-title="INFO", Last Update: {curr_time}\nhttp://0.0.0.0\n\n')
-            # 2. BRANDING COMMENTS
-            f.write(f'# POWERED BY: {POWERED_BY}\n')
-            f.write(f'# LAST UPDATED: {curr_time} IST\n\n')
-            f.write("\n".join(m3u_entries))
+        if m3u_entries:
+            m3u_entries.sort(key=lambda x: x.split(",")[-1].strip().lower())
+            with open("Live.m3u", "w", encoding="utf-8") as f:
+                # WRITING HEADER WITH MONTH NAME
+                f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
+                f.write(f'# POWERED BY: {POWERED_BY}\n')
+                f.write(f'# LAST UPDATED: {curr_time} IST\n\n')
+                
+                # OPTIONAL: Add an Info Channel that shows up on the TV Screen
+                f.write(f'#EXTINF:-1 tvg-id="0" tvg-logo="https://i.imgur.com/8N69fS7.png" group-title="INFO", --- {POWERED_BY} ---\nhttp://0.0.0.0\n')
+                f.write(f'#EXTINF:-1 tvg-id="0" tvg-logo="https://i.imgur.com/8N69fS7.png" group-title="INFO", Updated: {curr_time}\nhttp://0.0.0.0\n\n')
+                
+                f.write("\n".join(m3u_entries))
             
-        print(f"[SUCCESS] Updated: {curr_time}")
+            print(f"[SUCCESS] Updated: {curr_time}")
+            
     except Exception as e: print(f"[-] Error: {e}")
 
 if __name__ == "__main__":
