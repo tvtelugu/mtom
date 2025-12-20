@@ -1,0 +1,32 @@
+name: Update Telugu M3U Every 6 Hours
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Fetcher
+        run: python mactom3u.py
+
+      - name: Push to Repository
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Live.m3u
+          git commit -m "Updated Telugu M3U - $(date)" || echo "No changes"
+          git push
