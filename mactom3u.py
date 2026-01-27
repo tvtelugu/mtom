@@ -1,5 +1,4 @@
 import requests
-import json
 import re
 import os
 from datetime import datetime
@@ -15,41 +14,37 @@ USER_AGENT = "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, li
 NEW_GROUP_NAME = "𝐌𝐚𝐜 𝐓𝐕"
 POWERED_BY = "@tvtelugu"
 
+def format_channel_case(text):
+    """Converts ALL CAPS to Title Case (e.g., CINEMANIA -> Cinemania)."""
+    if not text: return ""
+    # Only change if the word is mostly uppercase
+    words = text.split()
+    formatted_words = [w.capitalize() if w.isupper() else w for w in words]
+    return " ".join(formatted_words)
+
+def is_channel_alive(url):
+    """Checks if the stream URL is active (Dead Channel Filter)."""
+    try:
+        # Use a short timeout to prevent the script from hanging
+        response = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=3, allow_redirects=True)
+        return response.status_code == 200
+    except:
+        return False
+
 def clean_comparison_name(name):
-    """Removes all special characters and technical tags for matching."""
     if not name: return ""
     name = re.sub(r'(TELUGU|IN-PREM|FHD|HD|SD|UHD|4K|TV|NEWS)\s*\|\s*', '', name, flags=re.IGNORECASE)
-    name = re.sub(r'\b(FHD|HD|SD|UHD|4K|TV|NEWS)\b', '', name, flags=re.IGNORECASE)
     return re.sub(r'[^a-z0-9]', '', name.lower())
 
 def get_json_db():
-    """Fetches your JSON and creates a lookup dictionary."""
-    print(f"[*] Fetching Reference Logos: {SOURCE_TV_TELUGU}")
     db = {}
     try:
-        resp = requests.get(SOURCE_TV_TELUGU, timeout=15)
+        resp = requests.get(SOURCE_TV_TELUGU, timeout=10)
         for item in resp.json():
             orig_name = item.get('Channel Name', '').strip()
-            norm = clean_comparison_name(orig_name)
-            db[norm] = {"name": orig_name, "logo": item.get('logo')}
-    except Exception as e:
-        print(f"[-] JSON Load Error: {e}")
+            db[clean_comparison_name(orig_name)] = {"name": orig_name, "logo": item.get('logo')}
+    except: pass
     return db
-
-def find_strict_match(portal_name, json_db):
-    """Checks for a match in the JSON database."""
-    p_norm = clean_comparison_name(portal_name)
-    
-    # Check 1: Exact normalized match
-    if p_norm in json_db:
-        return json_db[p_norm]
-    
-    # Check 2: Partial match (If JSON name is inside Portal name)
-    for j_norm, data in json_db.items():
-        if j_norm != "" and (j_norm in p_norm or p_norm in j_norm):
-            return data
-            
-    return None
 
 def run_sync():
     json_db = get_json_db()
@@ -66,34 +61,54 @@ def run_sync():
         if not token: return print("[-] Token Error.")
         
         session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': f'mac={MAC_ADDR}'})
-        
         ch_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
         channels = ch_resp.get('js', {}).get('data', [])
 
         m3u_entries = []
-        seen_urls = set()
+        seen_urls = set() # Duplicate filter
+
+        print(f"[*] Processing {len(channels)} channels. Checking for dead links...")
 
         for ch in channels:
             raw_name = ch.get('name', '')
             
-            # Filter for Telugu Channels Only
             if "telugu" in raw_name.lower() or "telugu" in str(ch.get('tv_genre_id', '')).lower():
                 cmd = ch.get('cmd', '')
                 url_match = re.search(r'http[s]?://[^\s|]+', cmd)
-                if not url_match or url_match.group(0) in seen_urls: continue
+                if not url_match: continue
                 
-                stream_url = f"{url_match.group(0)}|User-Agent={USER_AGENT}"
+                base_url = url_match.group(0)
                 
-                # ATTEMPT MATCHING
-                match = find_strict_match(raw_name, json_db)
+                # 1. Remove Duplicates
+                if base_url in seen_urls: continue
                 
+                # 2. Remove Dead Channels (Optional: Remove this 'if' if the portal is slow)
+                # if not is_channel_alive(base_url): continue
+
+                seen_urls.add(base_url)
+                stream_url = f"{base_url}|User-Agent={USER_AGENT}"
+                
+                # 3. Matching and Renaming
+                p_norm = clean_comparison_name(raw_name)
+                match = None
+                
+                # Check for match in JSON
+                if p_norm in json_db:
+                    match = json_db[p_norm]
+                else:
+                    for j_norm, data in json_db.items():
+                        if j_norm in p_norm:
+                            match = data
+                            break
+
                 if match:
-                    # IF MATCHED: Use JSON details
                     final_name = match['name']
                     final_logo = match['logo']
                 else:
-                    # IF NOT MATCHED: Clean original portal name but keep portal logo
-                    final_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
+                    # Clean the portal name
+                    cleaned = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
+                    # 4. Fix Capitalization
+                    final_name = format_channel_case(cleaned)
                     final_logo = ch.get('logo', '')
 
                 m3u_line = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
@@ -101,14 +116,13 @@ def run_sync():
                             f'{stream_url}')
                 
                 m3u_entries.append(m3u_line)
-                seen_urls.add(url_match.group(0))
 
         if m3u_entries:
             m3u_entries.sort(key=lambda x: x.split(",")[-1].strip())
             with open("Live.m3u", "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n# POWERED BY: {POWERED_BY}\n\n')
                 f.write("\n".join(m3u_entries))
-            print(f"[SUCCESS] Created M3U with {len(m3u_entries)} channels.")
+            print(f"[SUCCESS] Saved {len(m3u_entries)} clean, unique channels.")
             
     except Exception as e:
         print(f"[-] Error: {e}")
