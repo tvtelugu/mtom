@@ -15,7 +15,7 @@ NEW_GROUP_NAME = "𝐌𝐚𝐜 𝐓𝐕"
 POWERED_BY = "@tvtelugu"
 
 def check_link(url):
-    """Verifies if the stream is active."""
+    """Checks if stream is alive within 2 seconds."""
     try:
         r = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=2)
         return r.status_code == 200
@@ -23,16 +23,20 @@ def check_link(url):
         return False
 
 def clean_final_name(name):
+    """Strict standardization and targeted renaming."""
     if not name: return ""
 
-    # 1. Standardize Case for Suffixes
+    # 1. Generic Standardizing (Case & Quality)
     name = re.sub(r'\b(hd|Hd|hD)\b', 'HD', name)
     name = re.sub(r'\b(tv|Tv|tV)\b', 'TV', name)
     name = re.sub(r'\b(fhd|Fhd|FHD)\b', 'HD', name)
-    name = re.sub(r'\bsd\b', '', name, flags=re.IGNORECASE) # Remove "Sd" tags
-
-    # 2. Strict Mapping Rules
+    
+    # 2. Targeted Forced Renames
     mapping = {
+        r"STUDIO ONEP": "Studio One +",
+        r"STUDIO YUVA": "Studio Yuva Alpha",
+        r"TATA SKY TELUGU CINEMA": "Tata Play Telugu Cinema",
+        r"HOLLYWOOD LOCAL": "Tata Play Hollywood Local Telugu",
         r"Bbc Earth HD": "Sony BBC Earth HD",
         r"Discovery World HD": "Discovery HD World",
         r"Etv$": "ETV Telugu",
@@ -45,25 +49,24 @@ def clean_final_name(name):
         r"Tv 9": "TV9 Telugu",
         r"Zee CinemaluHD": "Zee Cinemalu HD",
         r"Zee Cinemalu Sd": "Zee Cinemalu",
-        r"Zee Telugu Sd": "Zee Telugu",
-        r"Abn Andhra Jyothy": "ABN Andhra Jyothi"
+        r"Zee Telugu Sd": "Zee Telugu"
     }
 
     for pattern, replacement in mapping.items():
         if re.search(pattern, name, re.IGNORECASE):
             name = replacement
             break
-    
-    # Final cleanup of extra spaces
+            
     return ' '.join(name.split()).strip()
 
 def get_json_db():
+    """Builds a lookup for names and logos from your JSON."""
     db = {}
     try:
         resp = requests.get(SOURCE_TV_TELUGU, timeout=10)
         for item in resp.json():
             name = item.get('Channel Name', '').strip()
-            # Normalize for matching
+            # Normalize key (lowercase, no spaces/symbols)
             norm = re.sub(r'[^a-z0-9]', '', name.lower())
             db[norm] = {"name": name, "logo": item.get('logo')}
     except: pass
@@ -77,7 +80,6 @@ def run_sync():
     headers = {'User-Agent': USER_AGENT, 'X-User-Agent': 'Model: MAG250', 'Cookie': f'mac={MAC_ADDR}'}
     session = requests.Session()
     
-    # List of channels to totally remove
     BLACKLIST = ["udaya movies"]
 
     try:
@@ -89,15 +91,13 @@ def run_sync():
         channels_data = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
         channels = channels_data.get('js', {}).get('data', [])
 
-        unique_channels = {} # Key: Normalized Name, Value: M3U Entry
+        unique_channels = {} 
 
         for ch in channels:
             raw_name = ch.get('name', '')
             
-            # Blacklist Filter
+            # Skip blacklisted or non-telugu
             if any(b in raw_name.lower() for b in BLACKLIST): continue
-
-            # Telugu Filter
             if "telugu" not in raw_name.lower() and "telugu" not in str(ch.get('tv_genre_id', '')):
                 continue
 
@@ -106,27 +106,29 @@ def run_sync():
             if not url_match: continue
             stream_url = url_match.group(0)
 
-            # Apply strict naming and formatting
+            # 1. Clean the name based on rules
             display_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
             display_name = clean_final_name(display_name)
             
-            # Matching for strict logo priority
+            # 2. Strict Logo & Name Match from your JSON
             norm_key = re.sub(r'[^a-z0-9]', '', display_name.lower())
             logo = ch.get('logo', '')
+            
             if norm_key in json_db:
-                # Strictly take Logo from JSON if matched
+                # OVERWRITE with JSON data
+                display_name = json_db[norm_key]['name']
                 logo = json_db[norm_key]['logo']
 
-            # DEDUPLICATION: Only add if this brand isn't already stored
+            # 3. Deduplication: One working channel per Brand
             if norm_key not in unique_channels:
-                print(f"Validating: {display_name}")
+                print(f"Testing: {display_name}...")
                 if check_link(stream_url):
                     entry = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
                              f'tvg-logo="{logo}" group-title="{NEW_GROUP_NAME}", {display_name}\n'
                              f'{stream_url}|User-Agent={USER_AGENT}')
                     unique_channels[norm_key] = entry
 
-        # SAVE FILE
+        # Save to M3U
         if unique_channels:
             sorted_entries = sorted(unique_channels.values(), key=lambda x: x.split(",")[-1])
             with open("Live.m3u", "w", encoding="utf-8") as f:
