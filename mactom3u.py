@@ -10,12 +10,8 @@ PORTAL_URL = "http://line.vueott.com:80"
 MAC_ADDR = "00:1A:79:00:3d:1f" 
 EPG_URL = "https://avkb.short.gy/tsepg.xml.gz"
 
-# New Target Source
 SOURCE_TV_TELUGU = "https://tvtelugu.pages.dev/logo/channels.json"
-
 SOURCE_TATA = "https://raw.githubusercontent.com/ForceGT/Tata-Sky-IPTV/master/code_samples/allChannels.json"
-SOURCE_JIO1 = "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jtv.m3u"
-SOURCE_JIO2 = "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
 
 USER_AGENT = "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3"
 NEW_GROUP_NAME = "𝐌𝐚𝐜 𝐓𝐕"
@@ -23,59 +19,53 @@ POWERED_BY = "@tvtelugu"
 
 def normalize_name(name):
     if not name: return ""
+    # Remove technical suffixes and prefixes
     name = re.sub(r'(TELUGU|IN-PREM|FHD|HD|SD|UHD|4K)\s*\|\s*', '', name, flags=re.IGNORECASE)
     name = re.sub(r'\b(FHD|HD|SD|UHD|4K)\b', '', name, flags=re.IGNORECASE)
     name = re.sub(r'[\(\[\]\)]', '', name)
-    name = ' '.join(name.split()).lower().strip()
-    if "maa" in name:
-        sub = name.replace("star", "").replace("maa", "").replace("tv", "").strip()
-        return f"star maa {sub}".strip() if sub else "star maa"
-    return name
+    # Remove all spaces for "fuzzy" comparison
+    return "".join(name.split()).lower().strip()
 
 def get_master_logo_db():
     print("[*] Fetching External Logo Database...")
     db = {}
-    # Added TV_TELUGU to the sources list
     sources = [
         ("TV_TELUGU", SOURCE_TV_TELUGU, "json_alt"), 
-        ("TATA", SOURCE_TATA, "json"), 
-        ("JIO1", SOURCE_JIO1, "m3u"), 
-        ("JIO2", SOURCE_JIO2, "m3u")
+        ("TATA", SOURCE_TATA, "json")
     ]
     
     for name, url, fmt in sources:
         try:
             resp = requests.get(url, timeout=10)
-            if fmt == "json_alt": # Logic for your specific JSON format
+            if fmt == "json_alt":
                 for item in resp.json():
-                    ch_name = item.get('Channel Name')
-                    norm = normalize_name(ch_name)
-                    db[norm] = {"id": "", "logo": item.get('logo'), "name": ch_name}
+                    orig_name = item.get('Channel Name', '')
+                    norm = normalize_name(orig_name)
+                    db[norm] = {"logo": item.get('logo'), "name": orig_name, "id": ""}
             elif fmt == "json":
                 for item in resp.json():
                     norm = normalize_name(item['channel_name'])
-                    db[norm] = {"id": f"ts{item['channel_id']}", "logo": item['channel_logo'], "name": item['channel_name']}
-            else:
-                matches = re.findall(r'tvg-logo="([^"]+)".*?,(.*?)\n', resp.text)
-                for logo_url, ch_name in matches:
-                    norm = normalize_name(ch_name)
                     if norm not in db:
-                        db[norm] = {"id": "", "logo": logo_url, "name": ch_name.strip()}
-        except Exception as e: 
-            print(f"[!] Warning: Failed to load {name} logos: {e}")
-            continue
-            
-    print(f"[+] Loaded {len(db)} logos from external sources.")
+                        db[norm] = {"logo": item['channel_logo'], "name": item['channel_name'], "id": f"ts{item['channel_id']}"}
+        except: continue
     return db
 
-def clean_url(raw_cmd):
-    if not raw_cmd: return ""
-    match = re.search(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', raw_cmd)
-    if not match: return ""
-    url = match.group(0)
-    if "mac=" in url:
-        url = re.sub(r'mac=[0-9A-Fa-f:]+', f'mac={MAC_ADDR}', url)
-    return f"{url}|User-Agent={USER_AGENT}"
+def find_best_match(portal_name, logo_db):
+    """
+    Attempts to find a logo even if the match is only partial.
+    """
+    p_norm = normalize_name(portal_name)
+    
+    # 1. Try Exact Match
+    if p_norm in logo_db:
+        return logo_db[p_norm]
+    
+    # 2. Try Partial Match (is logo name inside portal name or vice versa?)
+    for db_norm, data in logo_db.items():
+        if db_norm in p_norm or p_norm in db_norm:
+            return data
+            
+    return None
 
 def run_sync():
     logo_db = get_master_logo_db()
@@ -87,71 +77,54 @@ def run_sync():
     
     try:
         print(f"[*] Connecting to: {PORTAL_URL}")
-        handshake_url = f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml"
-        auth_resp = session.get(handshake_url, headers=headers)
-        auth = auth_resp.json()
-        token = auth.get('js', {}).get('token')
+        auth_resp = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers)
+        token = auth_resp.json().get('js', {}).get('token')
         
-        if not token:
-            print("[-] Critical Error: Could not get Token. Check MAC.")
-            return
-
+        if not token: return print("[-] Auth Failed.")
         session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': f'mac={MAC_ADDR}'})
 
-        print("[*] Requesting Channel List...")
         ch_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
         channels = ch_resp.get('js', {}).get('data', [])
 
-        if not channels:
-            print("[-] Error: Portal returned 0 channels.")
-            return
-
         m3u_entries = []
-        seen_keys = set()
+        seen_urls = set()
 
         for ch in channels:
-            p_name = ch.get('name', '')
-            norm = normalize_name(p_name)
+            raw_name = ch.get('name', '')
+            cmd = ch.get('cmd', '')
             
-            # Match Telugu channels
-            if "telugu" in p_name.lower() or "telugu" in str(ch.get('tv_genre_id', '')).lower():
-                if norm in seen_keys: continue
+            # Filter for Telugu
+            if "telugu" in raw_name.lower() or "telugu" in str(ch.get('tv_genre_id', '')).lower():
+                url = re.search(r'http[s]?://[^\s|]+', cmd)
+                if not url or url.group(0) in seen_urls: continue
+                final_url = f"{url.group(0)}|User-Agent={USER_AGENT}"
+
+                # FORCE PARTIAL MATCHING
+                match_data = find_best_match(raw_name, logo_db)
                 
-                url = clean_url(ch.get('cmd', ''))
-                if not url: continue
-
-                final_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', p_name, flags=re.IGNORECASE).strip()
-                final_logo = ch.get('logo', '')
-                final_id = ch.get('xmltv_id', '')
-
-                # Priority Logo Match
-                if norm in logo_db:
-                    final_name = logo_db[norm]['name']
-                    final_logo = logo_db[norm]['logo']
-                    if logo_db[norm].get('id'): final_id = logo_db[norm]['id']
+                if match_data:
+                    final_name = match_data['name']
+                    final_logo = match_data['logo']
+                    final_id = match_data['id'] or ch.get('xmltv_id', '')
+                else:
+                    # Fallback to original portal info if no match found
+                    final_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
+                    final_logo = ch.get('logo', '')
+                    final_id = ch.get('xmltv_id', '')
 
                 entry = (f'#EXTINF:-1 tvg-id="{final_id}" tvg-name="{final_name}" '
-                         f'tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n{url}')
+                         f'tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n{final_url}')
                 
                 m3u_entries.append(entry)
-                seen_keys.add(norm)
+                seen_urls.add(url.group(0))
 
         if m3u_entries:
-            m3u_entries.sort(key=lambda x: x.split(",")[-1].strip().lower())
-            file_path = os.path.join(os.getcwd(), "Live.m3u")
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
-                f.write(f'# POWERED BY: {POWERED_BY}\n')
-                f.write(f'# LAST UPDATED: {curr_time} IST\n\n')
+            with open("Live.m3u", "w", encoding="utf-8") as f:
+                f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n# POWERED BY: {POWERED_BY}\n\n')
                 f.write("\n".join(m3u_entries))
-            
-            print(f"\n[SUCCESS] File Created: {file_path}")
-            print(f"[+] Total Telugu Channels Saved: {len(m3u_entries)}")
-        else:
-            print("[-] No Telugu channels found.")
-            
-    except Exception as e: 
-        print(f"[-] Python Error: {e}")
+            print(f"[+] Saved {len(m3u_entries)} channels with forced matching.")
+
+    except Exception as e: print(f"[-] Error: {e}")
 
 if __name__ == "__main__":
     run_sync()
