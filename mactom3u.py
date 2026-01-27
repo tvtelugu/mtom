@@ -33,14 +33,16 @@ def clean_final_name(name):
     name = re.sub(r'\b(tv|Tv|tV)\b', 'TV', name)
     name = re.sub(r'\b(fhd|Fhd|FHD|4k|4K)\b', 'HD', name)
     name = re.sub(r'Telegu', 'Telugu', name, flags=re.IGNORECASE)
+    
+    # Remove 'SD' or 'Sd' specifically to keep names clean
+    name = re.sub(r'\b(sd|Sd|SD)\b', '', name).strip()
 
-    # 2. DYNAMIC RENAMING (Only Telugu 1-10, Telugu 2022 -> Telugu Movies 24/7)
-    # Cine Mania is excluded from renaming but will be moved to Group later
-    if re.search(r'Telugu\s*([1-9]|10|2022)', name, re.IGNORECASE):
-        return "Telugu Movies 24/7"
-
-    # 3. Targeted Forced Renames
+    # 2. FORCED RENAMES (Specific User Requests)
     mapping = {
+        r"TV\s*9": "TV9 Telugu",
+        r"CINEMANIA HD": "Cine Mania",
+        r"CINEMANIA": "Cine Mania",
+        r"ZEE CINEMALU SD": "Zee Cinemalu",
         r"Nat Geo Wild": "Nat Geo Wild HD",
         r"Ntv News": "NTV Telugu",
         r"Raj Musix": "Raj Musix Telugu",
@@ -63,6 +65,10 @@ def clean_final_name(name):
         r"Zee Telugu Sd": "Zee Telugu",
         r"Abn Andhra Jyothy": "ABN Andhra Jyothi"
     }
+
+    # 3. DYNAMIC RENAMING (Telugu 1-10, Telugu 2022 -> Telugu Movies 24/7)
+    if re.search(r'Telugu\s*([1-9]|10|2022)', name, re.IGNORECASE):
+        return "Telugu Movies 24/7"
 
     for pattern, replacement in mapping.items():
         if re.search(pattern, name, re.IGNORECASE):
@@ -94,7 +100,7 @@ def run_sync():
     BLACKLIST = ["udaya movies"]
 
     try:
-        print(f"[*] Connecting to Portal...")
+        print(f"[*] Connecting to Portal: {PORTAL_URL}")
         auth = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers).json()
         token = auth.get('js', {}).get('token')
         session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': f'mac={MAC_ADDR}'})
@@ -112,8 +118,8 @@ def run_sync():
             raw_name = ch.get('name', '')
             genre_name = genres.get(ch.get('tv_genre_id'), "")
             
-            # BROAD FILTER
-            is_match = re.search(r"(telugu|telegu|cine mania)", raw_name, re.IGNORECASE) or re.search(r"(telugu|telegu)", genre_name, re.IGNORECASE)
+            # Broad search for Telugu content
+            is_match = re.search(r"(telugu|telegu|cine mania|tv 9|cinemania)", raw_name, re.IGNORECASE) or re.search(r"(telugu|telegu)", genre_name, re.IGNORECASE)
             if not is_match or any(b in raw_name.lower() for b in BLACKLIST): continue
 
             cmd = ch.get('cmd', '')
@@ -127,32 +133,30 @@ def run_sync():
             display_name = re.sub(r'(TELUGU|TELEGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
             display_name = clean_final_name(display_name)
             
-            # --- GROUP LOGIC ---
-            # Move both "Telugu Movies 24/7" AND "Cine Mania" to Movies group
+            # Group assignment
             target_group = NEW_GROUP_NAME
             if display_name == "Telugu Movies 24/7" or "Cine Mania" in display_name:
                 target_group = MOVIE_GROUP_NAME
 
-            # Logo Logic
+            # Logo override
             logo = ch.get('logo', '')
-            # Force tvtelugu logo for the 24/7 generic streams
             if "24-7.png" in logo or display_name == "Telugu Movies 24/7":
                 logo = "https://tvtelugu.pages.dev/logo/tvtelugu.png"
 
             norm_key = re.sub(r'[^a-z0-9]', '', display_name.lower())
             
+            # JSON priority override
             if norm_key in json_db:
-                # Strictly use Name and Logo from JSON if it exists
                 display_name = json_db[norm_key]['name']
                 logo = json_db[norm_key]['logo']
 
-            # Deduplication
+            # Deduplication logic
             if norm_key in unique_channels and display_name != "Telugu Movies 24/7":
                 continue
 
             print(f"Checking: {display_name}")
             if check_link(stream_url):
-                # Unique key for multiple movie streams
+                # Unique keys for 24/7 movies to prevent auto-merging different movie streams
                 final_key = norm_key if display_name != "Telugu Movies 24/7" else f"{norm_key}_{len(seen_streams)}"
                 
                 entry = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
@@ -163,7 +167,7 @@ def run_sync():
                 seen_streams.add(stream_url)
 
         if unique_channels:
-            # Sorting logic: Movies group entries first, then alphabetically
+            # Sort: Movies group first, then alpha
             sorted_entries = sorted(unique_channels.values(), key=lambda x: (MOVIE_GROUP_NAME not in x, x.split(",")[-1].strip().lower()))
             with open("Live.m3u", "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n# POWERED BY: {POWERED_BY}\n\n')
