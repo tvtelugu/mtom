@@ -7,7 +7,7 @@ import pytz
 
 # --- CONFIGURATION ---
 PORTAL_URL = "http://line.vueott.com:80"
-MAC_ADDR = "00:1B:79:33:6A:F2"
+MAC_ADDR = "00:1A:79:7b:e4:2e"
 EPG_URL = "https://avkb.short.gy/tsepg.xml.gz"
 
 SOURCE_TATA = "https://raw.githubusercontent.com/ForceGT/Tata-Sky-IPTV/master/code_samples/allChannels.json"
