@@ -10,6 +10,9 @@ PORTAL_URL = "http://line.vueott.com:80"
 MAC_ADDR = "00:1A:79:00:3d:1f" 
 EPG_URL = "https://avkb.short.gy/tsepg.xml.gz"
 
+# New Target Source
+SOURCE_TV_TELUGU = "https://tvtelugu.pages.dev/logo/channels.json"
+
 SOURCE_TATA = "https://raw.githubusercontent.com/ForceGT/Tata-Sky-IPTV/master/code_samples/allChannels.json"
 SOURCE_JIO1 = "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jtv.m3u"
 SOURCE_JIO2 = "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
@@ -32,11 +35,23 @@ def normalize_name(name):
 def get_master_logo_db():
     print("[*] Fetching External Logo Database...")
     db = {}
-    sources = [("TATA", SOURCE_TATA, "json"), ("JIO1", SOURCE_JIO1, "m3u"), ("JIO2", SOURCE_JIO2, "m3u")]
+    # Added TV_TELUGU to the sources list
+    sources = [
+        ("TV_TELUGU", SOURCE_TV_TELUGU, "json_alt"), 
+        ("TATA", SOURCE_TATA, "json"), 
+        ("JIO1", SOURCE_JIO1, "m3u"), 
+        ("JIO2", SOURCE_JIO2, "m3u")
+    ]
+    
     for name, url, fmt in sources:
         try:
             resp = requests.get(url, timeout=10)
-            if fmt == "json":
+            if fmt == "json_alt": # Logic for your specific JSON format
+                for item in resp.json():
+                    ch_name = item.get('Channel Name')
+                    norm = normalize_name(ch_name)
+                    db[norm] = {"id": "", "logo": item.get('logo'), "name": ch_name}
+            elif fmt == "json":
                 for item in resp.json():
                     norm = normalize_name(item['channel_name'])
                     db[norm] = {"id": f"ts{item['channel_id']}", "logo": item['channel_logo'], "name": item['channel_name']}
@@ -46,7 +61,10 @@ def get_master_logo_db():
                     norm = normalize_name(ch_name)
                     if norm not in db:
                         db[norm] = {"id": "", "logo": logo_url, "name": ch_name.strip()}
-        except: continue
+        except Exception as e: 
+            print(f"[!] Warning: Failed to load {name} logos: {e}")
+            continue
+            
     print(f"[+] Loaded {len(db)} logos from external sources.")
     return db
 
@@ -55,7 +73,6 @@ def clean_url(raw_cmd):
     match = re.search(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', raw_cmd)
     if not match: return ""
     url = match.group(0)
-    # FORCE the MAC address in the URL
     if "mac=" in url:
         url = re.sub(r'mac=[0-9A-Fa-f:]+', f'mac={MAC_ADDR}', url)
     return f"{url}|User-Agent={USER_AGENT}"
@@ -70,28 +87,24 @@ def run_sync():
     
     try:
         print(f"[*] Connecting to: {PORTAL_URL}")
-        # 1. Handshake
         handshake_url = f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml"
         auth_resp = session.get(handshake_url, headers=headers)
         auth = auth_resp.json()
         token = auth.get('js', {}).get('token')
         
         if not token:
-            print("[-] Critical Error: Could not get Token from Portal. Check MAC address validity.")
+            print("[-] Critical Error: Could not get Token. Check MAC.")
             return
 
         session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': f'mac={MAC_ADDR}'})
 
-        # 2. Get Channels
         print("[*] Requesting Channel List...")
         ch_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
         channels = ch_resp.get('js', {}).get('data', [])
 
         if not channels:
-            print("[-] Error: Portal returned 0 channels. The MAC might be expired or blocked.")
+            print("[-] Error: Portal returned 0 channels.")
             return
-
-        print(f"[*] Portal returned {len(channels)} total channels. Filtering for Telugu...")
 
         m3u_entries = []
         seen_keys = set()
@@ -100,7 +113,7 @@ def run_sync():
             p_name = ch.get('name', '')
             norm = normalize_name(p_name)
             
-            # BROAD FILTER: Check name or genre for Telugu
+            # Match Telugu channels
             if "telugu" in p_name.lower() or "telugu" in str(ch.get('tv_genre_id', '')).lower():
                 if norm in seen_keys: continue
                 
@@ -111,10 +124,11 @@ def run_sync():
                 final_logo = ch.get('logo', '')
                 final_id = ch.get('xmltv_id', '')
 
+                # Priority Logo Match
                 if norm in logo_db:
                     final_name = logo_db[norm]['name']
                     final_logo = logo_db[norm]['logo']
-                    if logo_db[norm]['id']: final_id = logo_db[norm]['id']
+                    if logo_db[norm].get('id'): final_id = logo_db[norm]['id']
 
                 entry = (f'#EXTINF:-1 tvg-id="{final_id}" tvg-name="{final_name}" '
                          f'tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n{url}')
@@ -122,7 +136,6 @@ def run_sync():
                 m3u_entries.append(entry)
                 seen_keys.add(norm)
 
-        # 3. Save File
         if m3u_entries:
             m3u_entries.sort(key=lambda x: x.split(",")[-1].strip().lower())
             file_path = os.path.join(os.getcwd(), "Live.m3u")
@@ -135,7 +148,7 @@ def run_sync():
             print(f"\n[SUCCESS] File Created: {file_path}")
             print(f"[+] Total Telugu Channels Saved: {len(m3u_entries)}")
         else:
-            print("[-] No Telugu channels were found in the list. File not created.")
+            print("[-] No Telugu channels found.")
             
     except Exception as e: 
         print(f"[-] Python Error: {e}")
