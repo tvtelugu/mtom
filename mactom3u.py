@@ -12,7 +12,7 @@ EPG_URL = "https://avkb.short.gy/tsepg.xml.gz"
 SOURCE_TV_TELUGU = "https://tvtelugu.pages.dev/logo/channels.json"
 
 USER_AGENT = "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3"
-NEW_GROUP_NAME = "𝐌𝐚𝐜 𝐓𝐕"
+NEW_GROUP_NAME = "𝐓𝐞𝐥𝐮𝐠𝐮 | 𝐌𝐚𝐜 𝐓𝐕"
 MOVIE_GROUP_NAME = "𝐌𝐨𝐯𝐢𝐞𝐬"
 POWERED_BY = "@tvtelugu"
 
