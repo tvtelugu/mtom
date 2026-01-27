@@ -14,35 +14,53 @@ USER_AGENT = "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, li
 NEW_GROUP_NAME = "𝐌𝐚𝐜 𝐓𝐕"
 POWERED_BY = "@tvtelugu"
 
-def format_channel_case(text):
-    """Converts ALL CAPS to Title Case (e.g., CINEMANIA -> Cinemania)."""
-    if not text: return ""
-    # Only change if the word is mostly uppercase
-    words = text.split()
-    formatted_words = [w.capitalize() if w.isupper() else w for w in words]
-    return " ".join(formatted_words)
+def clean_final_name(name):
+    """Handles specific renames and quality normalization."""
+    if not name: return ""
+    
+    # 1. Convert FHD/UHD to HD
+    name = re.sub(r'\b(FHD|UHD|4K)\b', 'HD', name, flags=re.IGNORECASE)
+    
+    # 2. Specific Forced Renames
+    renames = {
+        "Hollywood Local": "Tata Play Hollywood Local Telugu",
+        "Tata Sky Telugu Cinema Hd": "Tata Play Telugu Cinema",
+        "Tata Sky Telugu Cinema": "Tata Play Telugu Cinema",
+        "Abn Andhra Jyothy": "ABN Andhra Jyothi",
+        "Gemini Fhd": "Gemini HD",
+        "Star Maa Fhd": "Star Maa HD",
+        "Star Maa Movies Fhd": "Star Maa Movies HD",
+        "Nat Geo Fhd": "Nat Geo HD"
+    }
+    
+    # Check for direct matches or partials in the rename dict
+    for old, new in renames.items():
+        if old.lower() in name.lower():
+            name = new
+            break
 
-def is_channel_alive(url):
-    """Checks if the stream URL is active (Dead Channel Filter)."""
+    # 3. Fix Capitalization (CINEMANIA -> Cinemania)
+    words = name.split()
+    name = " ".join([w.capitalize() if w.isupper() and len(w) > 1 else w for w in words])
+    
+    return name.strip()
+
+def check_link(url):
+    """Verifies if the stream is active."""
     try:
-        # Use a short timeout to prevent the script from hanging
-        response = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=3, allow_redirects=True)
-        return response.status_code == 200
+        r = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=2)
+        return r.status_code == 200
     except:
         return False
-
-def clean_comparison_name(name):
-    if not name: return ""
-    name = re.sub(r'(TELUGU|IN-PREM|FHD|HD|SD|UHD|4K|TV|NEWS)\s*\|\s*', '', name, flags=re.IGNORECASE)
-    return re.sub(r'[^a-z0-9]', '', name.lower())
 
 def get_json_db():
     db = {}
     try:
         resp = requests.get(SOURCE_TV_TELUGU, timeout=10)
         for item in resp.json():
-            orig_name = item.get('Channel Name', '').strip()
-            db[clean_comparison_name(orig_name)] = {"name": orig_name, "logo": item.get('logo')}
+            name = item.get('Channel Name', '').strip()
+            norm = re.sub(r'[^a-z0-9]', '', name.lower())
+            db[norm] = {"name": name, "logo": item.get('logo')}
     except: pass
     return db
 
@@ -55,75 +73,57 @@ def run_sync():
     session = requests.Session()
     
     try:
-        print(f"[*] Connecting to Portal...")
-        auth_resp = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers)
-        token = auth_resp.json().get('js', {}).get('token')
-        if not token: return print("[-] Token Error.")
-        
+        print("[*] Connecting to Portal...")
+        auth = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers).json()
+        token = auth.get('js', {}).get('token')
         session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': f'mac={MAC_ADDR}'})
-        ch_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
-        channels = ch_resp.get('js', {}).get('data', [])
+        
+        channels = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json().get('js', {}).get('data', [])
 
-        m3u_entries = []
-        seen_urls = set() # Duplicate filter
+        unique_channels = {} # Key: Normalized Name, Value: M3U Entry
 
-        print(f"[*] Processing {len(channels)} channels. Checking for dead links...")
+        print(f"[*] Filtering and deduplicating {len(channels)} channels...")
 
         for ch in channels:
             raw_name = ch.get('name', '')
+            if "telugu" not in raw_name.lower() and "telugu" not in str(ch.get('tv_genre_id', '')):
+                continue
+
+            cmd = ch.get('cmd', '')
+            url_match = re.search(r'http[s]?://[^\s|]+', cmd)
+            if not url_match: continue
+            stream_url = url_match.group(0)
+
+            # --- PROCESS NAME ---
+            # Remove "TELUGU |" prefixes first
+            display_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
+            display_name = clean_final_name(display_name)
             
-            if "telugu" in raw_name.lower() or "telugu" in str(ch.get('tv_genre_id', '')).lower():
-                cmd = ch.get('cmd', '')
-                url_match = re.search(r'http[s]?://[^\s|]+', cmd)
-                if not url_match: continue
-                
-                base_url = url_match.group(0)
-                
-                # 1. Remove Duplicates
-                if base_url in seen_urls: continue
-                
-                # 2. Remove Dead Channels (Optional: Remove this 'if' if the portal is slow)
-                # if not is_channel_alive(base_url): continue
+            # --- MATCH LOGO ---
+            norm_key = re.sub(r'[^a-z0-9]', '', display_name.lower())
+            logo = ch.get('logo', '')
+            if norm_key in json_db:
+                display_name = json_db[norm_key]['name']
+                logo = json_db[norm_key]['logo']
 
-                seen_urls.add(base_url)
-                stream_url = f"{base_url}|User-Agent={USER_AGENT}"
-                
-                # 3. Matching and Renaming
-                p_norm = clean_comparison_name(raw_name)
-                match = None
-                
-                # Check for match in JSON
-                if p_norm in json_db:
-                    match = json_db[p_norm]
-                else:
-                    for j_norm, data in json_db.items():
-                        if j_norm in p_norm:
-                            match = data
-                            break
+            # --- DEDUPLICATION & LIVE CHECK ---
+            # If we already have this channel name, check if the current one works
+            if norm_key not in unique_channels:
+                print(f"Checking: {display_name}...")
+                if check_link(stream_url):
+                    entry = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
+                             f'tvg-logo="{logo}" group-title="{NEW_GROUP_NAME}", {display_name}\n'
+                             f'{stream_url}|User-Agent={USER_AGENT}')
+                    unique_channels[norm_key] = entry
 
-                if match:
-                    final_name = match['name']
-                    final_logo = match['logo']
-                else:
-                    # Clean the portal name
-                    cleaned = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
-                    # 4. Fix Capitalization
-                    final_name = format_channel_case(cleaned)
-                    final_logo = ch.get('logo', '')
-
-                m3u_line = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
-                            f'tvg-logo="{final_logo}" group-title="{NEW_GROUP_NAME}", {final_name}\n'
-                            f'{stream_url}')
-                
-                m3u_entries.append(m3u_line)
-
-        if m3u_entries:
-            m3u_entries.sort(key=lambda x: x.split(",")[-1].strip())
+        # --- SAVE FILE ---
+        if unique_channels:
+            sorted_entries = sorted(unique_channels.values(), key=lambda x: x.split(",")[-1])
             with open("Live.m3u", "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n# POWERED BY: {POWERED_BY}\n\n')
-                f.write("\n".join(m3u_entries))
-            print(f"[SUCCESS] Saved {len(m3u_entries)} clean, unique channels.")
-            
+                f.write("\n".join(sorted_entries))
+            print(f"[SUCCESS] Saved {len(unique_channels)} unique, working channels.")
+
     except Exception as e:
         print(f"[-] Error: {e}")
 
