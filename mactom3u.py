@@ -1,6 +1,7 @@
 import requests
 import re
 import os
+import json
 from datetime import datetime
 import pytz
 
@@ -12,12 +13,13 @@ SOURCE_TV_TELUGU = "https://tvtelugu.pages.dev/logo/channels.json"
 
 USER_AGENT = "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3"
 NEW_GROUP_NAME = "𝐌𝐚𝐜 𝐓𝐕"
+MOVIE_GROUP_NAME = "𝐌𝐨𝐯𝐢𝐞𝐬"
 POWERED_BY = "@tvtelugu"
 
 def check_link(url):
-    """Checks if stream is alive within 2 seconds."""
+    """Verifies if stream is alive within 3 seconds."""
     try:
-        r = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=2)
+        r = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=3, allow_redirects=True)
         return r.status_code == 200
     except:
         return False
@@ -26,13 +28,24 @@ def clean_final_name(name):
     """Strict standardization and targeted renaming."""
     if not name: return ""
 
-    # 1. Generic Standardizing (Case & Quality)
+    # 1. Standardize Case and Global Typo Fix
     name = re.sub(r'\b(hd|Hd|hD)\b', 'HD', name)
     name = re.sub(r'\b(tv|Tv|tV)\b', 'TV', name)
-    name = re.sub(r'\b(fhd|Fhd|FHD)\b', 'HD', name)
-    
-    # 2. Targeted Forced Renames
+    name = re.sub(r'\b(fhd|Fhd|FHD|4k|4K)\b', 'HD', name)
+    name = re.sub(r'Telegu', 'Telugu', name, flags=re.IGNORECASE)
+
+    # 2. DYNAMIC RENAMING (Only Telugu 1-10, Telugu 2022 -> Telugu Movies 24/7)
+    # Cine Mania is excluded from renaming but will be moved to Group later
+    if re.search(r'Telugu\s*([1-9]|10|2022)', name, re.IGNORECASE):
+        return "Telugu Movies 24/7"
+
+    # 3. Targeted Forced Renames
     mapping = {
+        r"Nat Geo Wild": "Nat Geo Wild HD",
+        r"Ntv News": "NTV Telugu",
+        r"Raj Musix": "Raj Musix Telugu",
+        r"Raj News": "Raj News Telugu",
+        r"Nat Geo HD": "National Geographic HD",
         r"STUDIO ONEP": "Studio One +",
         r"STUDIO YUVA": "Studio Yuva Alpha",
         r"TATA SKY TELUGU CINEMA": "Tata Play Telugu Cinema",
@@ -46,10 +59,9 @@ def clean_final_name(name):
         r"Maa Music": "Star Maa Music",
         r"Maatv": "Star Maa",
         r"Tv9 Telugu News": "TV9 Telugu",
-        r"Tv 9": "TV9 Telugu",
         r"Zee CinemaluHD": "Zee Cinemalu HD",
-        r"Zee Cinemalu Sd": "Zee Cinemalu",
-        r"Zee Telugu Sd": "Zee Telugu"
+        r"Zee Telugu Sd": "Zee Telugu",
+        r"Abn Andhra Jyothy": "ABN Andhra Jyothi"
     }
 
     for pattern, replacement in mapping.items():
@@ -66,7 +78,6 @@ def get_json_db():
         resp = requests.get(SOURCE_TV_TELUGU, timeout=10)
         for item in resp.json():
             name = item.get('Channel Name', '').strip()
-            # Normalize key (lowercase, no spaces/symbols)
             norm = re.sub(r'[^a-z0-9]', '', name.lower())
             db[norm] = {"name": name, "logo": item.get('logo')}
     except: pass
@@ -83,61 +94,83 @@ def run_sync():
     BLACKLIST = ["udaya movies"]
 
     try:
-        print("[*] Connecting to Portal...")
+        print(f"[*] Connecting to Portal...")
         auth = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers).json()
         token = auth.get('js', {}).get('token')
         session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': f'mac={MAC_ADDR}'})
         
-        channels_data = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
-        channels = channels_data.get('js', {}).get('data', [])
+        cat_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_genres&JsHttpRequest=1-xml").json()
+        genres = {g.get('id'): g.get('title', '').lower() for g in cat_resp.get('js', [])}
+
+        ch_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
+        channels = ch_resp.get('js', {}).get('data', [])
 
         unique_channels = {} 
+        seen_streams = set()
 
         for ch in channels:
             raw_name = ch.get('name', '')
+            genre_name = genres.get(ch.get('tv_genre_id'), "")
             
-            # Skip blacklisted or non-telugu
-            if any(b in raw_name.lower() for b in BLACKLIST): continue
-            if "telugu" not in raw_name.lower() and "telugu" not in str(ch.get('tv_genre_id', '')):
-                continue
+            # BROAD FILTER
+            is_match = re.search(r"(telugu|telegu|cine mania)", raw_name, re.IGNORECASE) or re.search(r"(telugu|telegu)", genre_name, re.IGNORECASE)
+            if not is_match or any(b in raw_name.lower() for b in BLACKLIST): continue
 
             cmd = ch.get('cmd', '')
             url_match = re.search(r'http[s]?://[^\s|]+', cmd)
             if not url_match: continue
             stream_url = url_match.group(0)
 
-            # 1. Clean the name based on rules
-            display_name = re.sub(r'(TELUGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
+            if stream_url in seen_streams: continue
+
+            # Cleanup and Rename
+            display_name = re.sub(r'(TELUGU|TELEGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
             display_name = clean_final_name(display_name)
             
-            # 2. Strict Logo & Name Match from your JSON
-            norm_key = re.sub(r'[^a-z0-9]', '', display_name.lower())
+            # --- GROUP LOGIC ---
+            # Move both "Telugu Movies 24/7" AND "Cine Mania" to Movies group
+            target_group = NEW_GROUP_NAME
+            if display_name == "Telugu Movies 24/7" or "Cine Mania" in display_name:
+                target_group = MOVIE_GROUP_NAME
+
+            # Logo Logic
             logo = ch.get('logo', '')
+            # Force tvtelugu logo for the 24/7 generic streams
+            if "24-7.png" in logo or display_name == "Telugu Movies 24/7":
+                logo = "https://tvtelugu.pages.dev/logo/tvtelugu.png"
+
+            norm_key = re.sub(r'[^a-z0-9]', '', display_name.lower())
             
             if norm_key in json_db:
-                # OVERWRITE with JSON data
+                # Strictly use Name and Logo from JSON if it exists
                 display_name = json_db[norm_key]['name']
                 logo = json_db[norm_key]['logo']
 
-            # 3. Deduplication: One working channel per Brand
-            if norm_key not in unique_channels:
-                print(f"Testing: {display_name}...")
-                if check_link(stream_url):
-                    entry = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
-                             f'tvg-logo="{logo}" group-title="{NEW_GROUP_NAME}", {display_name}\n'
-                             f'{stream_url}|User-Agent={USER_AGENT}')
-                    unique_channels[norm_key] = entry
+            # Deduplication
+            if norm_key in unique_channels and display_name != "Telugu Movies 24/7":
+                continue
 
-        # Save to M3U
+            print(f"Checking: {display_name}")
+            if check_link(stream_url):
+                # Unique key for multiple movie streams
+                final_key = norm_key if display_name != "Telugu Movies 24/7" else f"{norm_key}_{len(seen_streams)}"
+                
+                entry = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
+                         f'tvg-logo="{logo}" group-title="{target_group}", {display_name}\n'
+                         f'{stream_url}|User-Agent={USER_AGENT}')
+                
+                unique_channels[final_key] = entry
+                seen_streams.add(stream_url)
+
         if unique_channels:
-            sorted_entries = sorted(unique_channels.values(), key=lambda x: x.split(",")[-1])
+            # Sorting logic: Movies group entries first, then alphabetically
+            sorted_entries = sorted(unique_channels.values(), key=lambda x: (MOVIE_GROUP_NAME not in x, x.split(",")[-1].strip().lower()))
             with open("Live.m3u", "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n# POWERED BY: {POWERED_BY}\n\n')
                 f.write("\n".join(sorted_entries))
-            print(f"\n[SUCCESS] Final list created with {len(unique_channels)} channels.")
+            print(f"[SUCCESS] Live.m3u created with {len(unique_channels)} channels.")
 
-    except Exception as e:
-        print(f"[-] Error: {e}")
+    except Exception as e: print(f"[-] Error: {e}")
 
 if __name__ == "__main__":
     run_sync()
