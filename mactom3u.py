@@ -7,7 +7,7 @@ import pytz
 
 # --- CONFIGURATION ---
 PORTAL_URL = "http://line.vueott.com:80"
-MAC_ADDR = "00:1A:79:00:3d:1f" 
+MAC_ADDR = "00:1A:79:b4:b7:47" 
 EPG_URL = "https://avkb.short.gy/tsepg.xml.gz"
 SOURCE_TV_TELUGU = "https://tvtelugu.pages.dev/logo/channels.json"
 
