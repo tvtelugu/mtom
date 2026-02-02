@@ -12,12 +12,11 @@ EPG_URL = "https://avkb.short.gy/tsepg.xml.gz"
 SOURCE_TV_TELUGU = "https://tvtelugu.pages.dev/logo/channels.json"
 
 USER_AGENT = "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3"
-NEW_GROUP_NAME = "𝐌𝐚𝐜 𝐓𝐕"
-MOVIE_GROUP_NAME = "𝐌𝐨𝐯𝐢𝐞𝐬"
+NEW_GROUP_NAME = "𝐓𝐞𝐥𝐮𝐠𝐮"
+MOVIE_GROUP_NAME = "𝐓𝐞𝐥𝐮𝐠𝐮 | 𝐌𝐨𝐯𝐢𝐞𝐬"
 POWERED_BY = "@tvtelugu"
 
 def check_link(url):
-    """Verifies if stream is alive. Increased timeout for stability."""
     try:
         r = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=4, allow_redirects=True)
         return r.status_code == 200
@@ -25,8 +24,8 @@ def check_link(url):
         return False
 
 def clean_final_name(name):
-    """Strict standardization and targeted renaming."""
-    if not name: return ""
+    if not name:
+        return ""
 
     name = re.sub(r'\b(hd|Hd|hD)\b', 'HD', name)
     name = re.sub(r'\b(tv|Tv|tV)\b', 'TV', name)
@@ -65,15 +64,14 @@ def clean_final_name(name):
     if re.search(r'Telugu\s*([1-9]|10|2022)', name, re.IGNORECASE):
         return "Telugu Movies 24/7"
 
-    for pattern, replacement in mapping.items():
-        if re.search(pattern, name, re.IGNORECASE):
-            name = replacement
+    for p, rpl in mapping.items():
+        if re.search(p, name, re.IGNORECASE):
+            name = rpl
             break
-            
+
     return ' '.join(name.split()).strip()
 
 def get_json_db():
-    """Builds a lookup for names and logos from your JSON source."""
     db = {}
     try:
         resp = requests.get(SOURCE_TV_TELUGU, timeout=10)
@@ -89,34 +87,38 @@ def run_sync():
     json_db = get_json_db()
     ist = pytz.timezone('Asia/Kolkata')
     curr_time = datetime.now(ist).strftime('%d %B %Y | %I:%M %p')
-    
+
     headers = {'User-Agent': USER_AGENT, 'X-User-Agent': 'Model: MAG250', 'Cookie': f'mac={MAC_ADDR}'}
     session = requests.Session()
-    
+
     BLACKLIST = ["udaya movies"]
 
+    # 🔥 NEW: tvg-id → Channel Name map
+    channels_json = {}
+
     try:
-        print(f"[*] Connecting to Portal: {PORTAL_URL}")
         auth = session.get(f"{PORTAL_URL}/portal.php?type=stb&action=handshake&JsHttpRequest=1-xml", headers=headers).json()
         token = auth.get('js', {}).get('token')
         session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': f'mac={MAC_ADDR}'})
-        
-        cat_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_genres&JsHttpRequest=1-xml").json()
-        genres = {g.get('id'): g.get('title', '').lower() for g in cat_resp.get('js', [])}
 
-        ch_resp = session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml").json()
-        channels = ch_resp.get('js', {}).get('data', [])
+        genres = {
+            g.get('id'): g.get('title', '').lower()
+            for g in session.get(f"{PORTAL_URL}/portal.php?type=itv&action=get_genres&JsHttpRequest=1-xml").json().get('js', [])
+        }
 
-        unique_channels = {} 
+        channels = session.get(
+            f"{PORTAL_URL}/portal.php?type=itv&action=get_all_channels&JsHttpRequest=1-xml"
+        ).json().get('js', {}).get('data', [])
+
+        unique_channels = {}
         seen_streams = set()
-
-        print(f"[*] Found {len(channels)} total channels. Starting Telugu fetch...")
 
         for ch in channels:
             raw_name = ch.get('name', '')
             genre_name = genres.get(ch.get('tv_genre_id'), "")
-            
-            is_match = re.search(r"(telugu|telegu|cine mania|tv 9|cinemania)", raw_name, re.IGNORECASE) or re.search(r"(telugu|telegu)", genre_name, re.IGNORECASE)
+
+            is_match = re.search(r"(telugu|telegu|cine mania|tv 9|cinemania)", raw_name, re.I) or \
+                       re.search(r"(telugu|telegu)", genre_name, re.I)
             if not is_match or any(b in raw_name.lower() for b in BLACKLIST):
                 continue
 
@@ -124,17 +126,15 @@ def run_sync():
             url_match = re.search(r'http[s]?://[^\s|]+', cmd)
             if not url_match:
                 continue
-            stream_url = url_match.group(0)
 
+            stream_url = url_match.group(0)
             if stream_url in seen_streams:
                 continue
 
-            display_name = re.sub(r'(TELUGU|TELEGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
+            display_name = re.sub(r'(TELUGU|TELEGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.I).strip()
             display_name = clean_final_name(display_name)
-            
-            target_group = NEW_GROUP_NAME
-            if display_name == "Telugu Movies 24/7" or "Cine Mania" in display_name:
-                target_group = MOVIE_GROUP_NAME
+
+            target_group = MOVIE_GROUP_NAME if display_name == "Telugu Movies 24/7" or "Cine Mania" in display_name else NEW_GROUP_NAME
 
             logo = ch.get('logo', '')
             if "24-7.png" in logo or display_name == "Telugu Movies 24/7":
@@ -148,38 +148,39 @@ def run_sync():
             if norm_key in unique_channels and display_name != "Telugu Movies 24/7":
                 continue
 
-            print(f"Validating Stream: {display_name}")
             if check_link(stream_url):
-                # 🔥 ONLY CHANGE: extract numeric stream id for tvg-id
+                # 🔥 tvg-id from stream number
                 m = re.search(r'stream=(\d+)', stream_url)
                 tvg_id = m.group(1) if m else ""
 
-                final_key = norm_key if display_name != "Telugu Movies 24/7" else f"{norm_key}_{len(seen_streams)}"
-                
                 entry = (
-                    f'#EXTINF:-1 tvg-id="{tvg_id}" '
-                    f'tvg-logo="{logo}" group-title="{target_group}", {display_name}\n'
+                    f'#EXTINF:-1 tvg-id="{tvg_id}" tvg-logo="{logo}" '
+                    f'group-title="{target_group}", {display_name}\n'
                     f'{stream_url}|User-Agent={USER_AGENT}'
                 )
-                
-                unique_channels[final_key] = entry
+
+                unique_channels[norm_key] = entry
                 seen_streams.add(stream_url)
 
+                # 🔥 NEW: add to Channels.json export
+                if tvg_id:
+                    channels_json[tvg_id] = display_name
+
         if unique_channels:
-            sorted_entries = sorted(
-                unique_channels.values(),
-                key=lambda x: (MOVIE_GROUP_NAME not in x, x.split(",")[-1].strip().lower())
-            )
             with open("Live.m3u", "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n# POWERED BY: {POWERED_BY}\n\n')
-                f.write("\n".join(sorted_entries))
+                f.write("\n".join(unique_channels.values()))
 
-            print(f"\n[SUCCESS] Live.m3u created with {len(unique_channels)} channels.")
+            # 🔥 NEW: write Channels.json
+            with open("Channels.json", "w", encoding="utf-8") as jf:
+                json.dump(channels_json, jf, indent=2, ensure_ascii=False)
+
+            print(f"[SUCCESS] Live.m3u + Channels.json created ({len(channels_json)} channels)")
         else:
-            print("[-] No working channels found.")
+            print("[-] No working channels found")
 
     except Exception as e:
-        print(f"[-] Error: {e}")
+        print("[-] Error:", e)
 
 if __name__ == "__main__":
     run_sync()
