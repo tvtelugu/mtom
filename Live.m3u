@@ -1,149 +1,117 @@
 #EXTM3U x-tvg-url="https://avkb.short.gy/tsepg.xml.gz"
 # POWERED BY: @tvtelugu
 
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Cine%20Mania.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Cine Mania
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1430509&extension=ts&play_token=RRCTf4Cg9t|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1024832&extension=ts&play_token=vmMsClxhnq|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019915&extension=ts&play_token=moHHyB4zfQ|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019916&extension=ts&play_token=UUw7ai8hXI|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019917&extension=ts&play_token=NWCZ1BOPbz|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019918&extension=ts&play_token=T5x0uapwJJ|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019919&extension=ts&play_token=jfL91Bi5AM|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019920&extension=ts&play_token=Jkvri06MbF|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019921&extension=ts&play_token=PIlFUrVbi6|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019922&extension=ts&play_token=SZz4EJQWEF|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019923&extension=ts&play_token=3V1PqjXC1O|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019924&extension=ts&play_token=wBUzfuzfqa|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/TV9%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", TV9 Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=464855&extension=ts&play_token=B9fqVz4wLI|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="10TV.in" tvg-logo="https://tvtelugu.pages.dev/logo/10%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", 10 TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155864&extension=ts&play_token=UNr7cQUMmz|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/4tv%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", 4tv News
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529125&extension=ts&play_token=s5mOdSrPR2|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/ABN%20Andhra%20Jyothi.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ABN Andhra Jyothi
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529115&extension=ts&play_token=ymnPcBVcOI|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="AradanaTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Aradana%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Aradana TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529122&extension=ts&play_token=eWwUEU41Jj|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="SonyBBCEarth.in" tvg-logo="https://tvtelugu.pages.dev/logo/Sony%20BBC%20Earth%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Sony BBC Earth HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155848&extension=ts&play_token=JiwERejj5Z|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="BhaktiTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Bhakti%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Bhakti TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155854&extension=ts&play_token=MHeMlltyBz|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="CartoonNetwork.in" tvg-logo="https://tvtelugu.pages.dev/logo/Cartoon%20Network.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Cartoon Network
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529118&extension=ts&play_token=cJmNrfHsHO|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="CVRHealth.in" tvg-logo="https://tvtelugu.pages.dev/logo/CVR%20Health.png" group-title="𝐌𝐚𝐜 𝐓𝐕", CVR Health
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097617&extension=ts&play_token=5ruvn2NCLD|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="CVRNews.in" tvg-logo="https://tvtelugu.pages.dev/logo/CVR%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", CVR News
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097618&extension=ts&play_token=3zHabYilEI|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="DDSaptagiri.in" tvg-logo="https://tvtelugu.pages.dev/logo/DD%20Saptagiri.png" group-title="𝐌𝐚𝐜 𝐓𝐕", DD Saptagiri
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529131&extension=ts&play_token=Zzxi1i4o3t|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="DDYadagiri.in" tvg-logo="https://tvtelugu.pages.dev/logo/DD%20Yadagiri.png" group-title="𝐌𝐚𝐜 𝐓𝐕", DD Yadagiri
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529124&extension=ts&play_token=OVICMnKADB|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="DiscoveryChannel.in" tvg-logo="https://tvtelugu.pages.dev/logo/Discovery%20Channel.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Discovery Channel
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529119&extension=ts&play_token=n9obxX3n1r|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="DiscoveryKids.in" tvg-logo="https://tvtelugu.pages.dev/logo/Discovery%20Kids.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Discovery Kids
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529120&extension=ts&play_token=9dRI6A0h3r|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="DiscoveryWorld.in" tvg-logo="https://tvtelugu.pages.dev/logo/Discovery%20HD%20World.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Discovery HD World
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155845&extension=ts&play_token=W8kaqXTJQW|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ETVTelengana.in" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281956&extension=ts&play_token=FWfYx6pl3q|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ETVAbhiruchi.in" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Abhiruchi.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Abhiruchi
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529139&extension=ts&play_token=PeH2SdFa3z|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ETVCinema.in" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Cinema%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Cinema HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155853&extension=ts&play_token=q30nk4dhr2|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ETV.in" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529138&extension=ts&play_token=iVZXZwT2QQ|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ETVLife.in" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Life.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Life
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529140&extension=ts&play_token=eaE6vt8wLF|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ETVPlus.in" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Plus.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Plus
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155855&extension=ts&play_token=FeNzW3OhN6|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="GeminiComedy.in" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20Comedy.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini Comedy
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155844&extension=ts&play_token=LXuA0n6LUB|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="GeminiTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20TV%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini TV HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155850&extension=ts&play_token=xYDxpGqQHC|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="GeminiLife.in" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20Life.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini Life
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155858&extension=ts&play_token=pz5rVZuSCa|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="GeminiMovies.in" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20Movies%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini Movies HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155851&extension=ts&play_token=CQNBgOfafB|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="GeminiMusic.in" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20Music.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini Music
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155857&extension=ts&play_token=NyooD3wh9K|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="GeminiTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281958&extension=ts&play_token=EEeFamifQj|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Gubbare.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gubbare
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529127&extension=ts&play_token=nrHzeXoYZH|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="HinduDharmam.in" tvg-logo="https://tvtelugu.pages.dev/logo/Hindu%20Dharmam.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Hindu Dharmam
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529137&extension=ts&play_token=vbJTNTSpI1|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="HistoryTV18.in" tvg-logo="https://tvtelugu.pages.dev/logo/HISTORY%20TV%2018%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", HISTORY TV 18 HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155849&extension=ts&play_token=C8tPZ23t3C|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="HMTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/HM%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", HM TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529132&extension=ts&play_token=UI3U93rsB4|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Tata%20Play%20Hollywood%20Local%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Tata Play Hollywood Local Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097632&extension=ts&play_token=hUht03mUWd|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="KushiTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Kushi%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Kushi TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155868&extension=ts&play_token=lNaVtswAZr|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="MAAGold.in" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20Gold.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa Gold
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281968&extension=ts&play_token=selHk3nRnY|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="MaaMusic.in" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20Music.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa Music
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281969&extension=ts&play_token=pBJmjGffMH|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="MAATV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281960&extension=ts&play_token=eSc6t3aT8v|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/National%20Geographic%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", National Geographic HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155847&extension=ts&play_token=QAQX4YEMeH|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="NatGeoWild.in" tvg-logo="https://tvtelugu.pages.dev/logo/Nat%20Geo%20Wild%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Nat Geo Wild HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281962&extension=ts&play_token=SmTNA3YoNx|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="NTVNews.in" tvg-logo="https://tvtelugu.pages.dev/logo/NTV%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", NTV Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=358093&extension=ts&play_token=mXJGK11miR|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="RajMusix.in" tvg-logo="https://tvtelugu.pages.dev/logo/Raj%20Musix%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Raj Musix Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529117&extension=ts&play_token=gXBpqTY4uT|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Raj%20News%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Raj News Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529116&extension=ts&play_token=cvREzfC4A5|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="SakshiTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Sakshi%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Sakshi TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529135&extension=ts&play_token=6cAEEcSWMq|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ShubhavaartaTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Shubhavaarta%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Shubhavaarta TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529123&extension=ts&play_token=gFNz08A38f|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="SonyPix.in" tvg-logo="https://tvtelugu.pages.dev/logo/SONY%20PIX%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", SONY PIX HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529145&extension=ts&play_token=IFeXZbpL4N|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="SonyYAY.in" tvg-logo="https://tvtelugu.pages.dev/logo/Sony%20Yay.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Sony Yay
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155862&extension=ts&play_token=bR4OswYnwL|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="StarMaa.in" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155843&extension=ts&play_token=SMromGz3tb|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="StarMaaMovies.in" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20Movies%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa Movies HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155842&extension=ts&play_token=nS2prLAqZ3|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Studio%20One%20%2B.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Studio One +
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097627&extension=ts&play_token=S0FamqGxsl|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Studio%20Yuva%20Alpha.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Studio Yuva Alpha
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097628&extension=ts&play_token=YzAiKaLN1b|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="Hungama.in" tvg-logo="https://tvtelugu.pages.dev/logo/Super%20Hungama.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Super Hungama
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097624&extension=ts&play_token=jdF18JBAy3|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Swara%20Sagar.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Swara Sagar
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529121&extension=ts&play_token=uz4b357Gkp|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="TNews.in" tvg-logo="https://tvtelugu.pages.dev/logo/T%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", T News
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529133&extension=ts&play_token=Q1VGIrGyta|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/Tata%20Play%20Telugu%20Cinema.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Tata Play Telugu Cinema
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155846&extension=ts&play_token=KukEb7jVkp|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="TV5.in" tvg-logo="https://tvtelugu.pages.dev/logo/TV5%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", TV5 News
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155861&extension=ts&play_token=M4BW982rY7|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="" tvg-logo="https://tvtelugu.pages.dev/logo/V6%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", V6 News
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155859&extension=ts&play_token=pUUcwDw9Ih|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="VanithaTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Vanitha%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Vanitha TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155871&extension=ts&play_token=BAsZ0QDRdw|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="VissaTV.in" tvg-logo="https://tvtelugu.pages.dev/logo/Vissa%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Vissa TV
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529134&extension=ts&play_token=PL4osxhZ6Y|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ZeeCinemalu.in" tvg-logo="https://tvtelugu.pages.dev/logo/Zee%20Cinemalu%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Zee Cinemalu HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155872&extension=ts&play_token=nr5DcwFhZr|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ZeeCinemalu.in" tvg-logo="https://tvtelugu.pages.dev/logo/Zee%20Cinemalu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Zee Cinemalu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529141&extension=ts&play_token=Iubua5543U|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ZeeTelugu.in" tvg-logo="https://tvtelugu.pages.dev/logo/Zee%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Zee Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281963&extension=ts&play_token=lvB36F9s54|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
-#EXTINF:-1 tvg-id="ZeeTelugu.in" tvg-logo="https://tvtelugu.pages.dev/logo/Zee%20Telugu%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Zee Telugu HD
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155866&extension=ts&play_token=X98lUmLSLW|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1430509" tvg-logo="https://tvtelugu.pages.dev/logo/Cine%20Mania.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Cine Mania
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1430509&extension=ts&play_token=Lv7jUnCJP4|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019917" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019917&extension=ts&play_token=RXIMq1xjpF|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019918" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019918&extension=ts&play_token=Vr2VV8L3u6|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019919" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019919&extension=ts&play_token=iYMqoMcq4l|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019920" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019920&extension=ts&play_token=tDAExIN0H4|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019921" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019921&extension=ts&play_token=RAgX0yRitA|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019923" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019923&extension=ts&play_token=a6R1nmiSHb|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019924" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1019924&extension=ts&play_token=rn74sJZGbu|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="464855" tvg-logo="https://tvtelugu.pages.dev/logo/TV9%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", TV9 Telugu
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=464855&extension=ts&play_token=hbKmoGWfu2|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155864" tvg-logo="https://tvtelugu.pages.dev/logo/10%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", 10 TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155864&extension=ts&play_token=Q6BuJW7dyy|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529125" tvg-logo="https://tvtelugu.pages.dev/logo/4tv%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", 4tv News
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529125&extension=ts&play_token=LlEzwkjhf8|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529126" tvg-logo="https://tvtelugu.pages.dev/logo/ABN%20Andhra%20Jyothi.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ABN Andhra Jyothi
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529126&extension=ts&play_token=XZPOxBgOQg|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529122" tvg-logo="https://tvtelugu.pages.dev/logo/Aradana%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Aradana TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529122&extension=ts&play_token=l0k7fAfmu5|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155848" tvg-logo="https://tvtelugu.pages.dev/logo/Sony%20BBC%20Earth%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Sony BBC Earth HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155848&extension=ts&play_token=shKbcjJDFa|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155854" tvg-logo="https://tvtelugu.pages.dev/logo/Bhakti%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Bhakti TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155854&extension=ts&play_token=32ETHMUQc3|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529131" tvg-logo="https://tvtelugu.pages.dev/logo/DD%20Saptagiri.png" group-title="𝐌𝐚𝐜 𝐓𝐕", DD Saptagiri
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529131&extension=ts&play_token=wBKmbQ5HtI|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529124" tvg-logo="https://tvtelugu.pages.dev/logo/DD%20Yadagiri.png" group-title="𝐌𝐚𝐜 𝐓𝐕", DD Yadagiri
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529124&extension=ts&play_token=Tg1sVGFeQt|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529119" tvg-logo="https://tvtelugu.pages.dev/logo/Discovery%20Channel.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Discovery Channel
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529119&extension=ts&play_token=0hbVRAl0Pd|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529120" tvg-logo="https://tvtelugu.pages.dev/logo/Discovery%20Kids.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Discovery Kids
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529120&extension=ts&play_token=wdVSzRU82x|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155845" tvg-logo="https://tvtelugu.pages.dev/logo/Discovery%20HD%20World.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Discovery HD World
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155845&extension=ts&play_token=QQTw19ZIMk|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="281956" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Telugu
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281956&extension=ts&play_token=P0Gh2MOO9z|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529139" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Abhiruchi.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Abhiruchi
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529139&extension=ts&play_token=OQCRLLSREq|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155853" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Cinema%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Cinema HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155853&extension=ts&play_token=pIRGVXbOhd|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529138" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529138&extension=ts&play_token=E1tGTLB3FG|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529140" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Life.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Life
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529140&extension=ts&play_token=4ABAiXehj9|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155855" tvg-logo="https://tvtelugu.pages.dev/logo/ETV%20Plus.png" group-title="𝐌𝐚𝐜 𝐓𝐕", ETV Plus
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155855&extension=ts&play_token=fUXNOSmwLx|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155851" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20Movies%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini Movies HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155851&extension=ts&play_token=zqBjeO9WZv|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155857" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20Music.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini Music
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155857&extension=ts&play_token=WvBjKH6VEn|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="281958" tvg-logo="https://tvtelugu.pages.dev/logo/Gemini%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gemini TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281958&extension=ts&play_token=PM2CHw3l8c|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529127" tvg-logo="https://tvtelugu.pages.dev/logo/Gubbare.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Gubbare
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529127&extension=ts&play_token=uVpC0WS3Sn|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529137" tvg-logo="https://tvtelugu.pages.dev/logo/Hindu%20Dharmam.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Hindu Dharmam
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529137&extension=ts&play_token=uPAE3tU79K|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155849" tvg-logo="https://tvtelugu.pages.dev/logo/HISTORY%20TV%2018%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", HISTORY TV 18 HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155849&extension=ts&play_token=9NvdQZOJX4|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529132" tvg-logo="https://tvtelugu.pages.dev/logo/HM%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", HM TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529132&extension=ts&play_token=INlopTSNFc|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1097632" tvg-logo="https://tvtelugu.pages.dev/logo/Tata%20Play%20Hollywood%20Local%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Tata Play Hollywood Local Telugu
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097632&extension=ts&play_token=LiD0VHRnKJ|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155868" tvg-logo="https://tvtelugu.pages.dev/logo/Kushi%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Kushi TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155868&extension=ts&play_token=G5EyRiP66D|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="281968" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20Gold.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa Gold
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281968&extension=ts&play_token=aOcD6E9lXZ|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="281969" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20Music.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa Music
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281969&extension=ts&play_token=Rn1B4MVr04|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155847" tvg-logo="https://tvtelugu.pages.dev/logo/National%20Geographic%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", National Geographic HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155847&extension=ts&play_token=T3yMp2yzsb|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529117" tvg-logo="https://tvtelugu.pages.dev/logo/Raj%20Musix%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Raj Musix Telugu
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529117&extension=ts&play_token=k6p47R0Q64|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529116" tvg-logo="https://tvtelugu.pages.dev/logo/Raj%20News%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Raj News Telugu
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529116&extension=ts&play_token=WkwtU3x0h6|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529135" tvg-logo="https://tvtelugu.pages.dev/logo/Sakshi%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Sakshi TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529135&extension=ts&play_token=3Jo2jDesWn|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529123" tvg-logo="https://tvtelugu.pages.dev/logo/Shubhavaarta%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Shubhavaarta TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529123&extension=ts&play_token=dwlOIS8k55|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529145" tvg-logo="https://tvtelugu.pages.dev/logo/SONY%20PIX%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", SONY PIX HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529145&extension=ts&play_token=gYwE8P1Sfc|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155862" tvg-logo="https://tvtelugu.pages.dev/logo/Sony%20Yay.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Sony Yay
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155862&extension=ts&play_token=ckEbqRPxrE|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155843" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155843&extension=ts&play_token=nNkCtD0Ajm|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155842" tvg-logo="https://tvtelugu.pages.dev/logo/Star%20Maa%20Movies%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Star Maa Movies HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155842&extension=ts&play_token=VqdbIf2JjH|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1097628" tvg-logo="https://tvtelugu.pages.dev/logo/Studio%20Yuva%20Alpha.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Studio Yuva Alpha
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1097628&extension=ts&play_token=FfJVnopK1s|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529121" tvg-logo="https://tvtelugu.pages.dev/logo/Swara%20Sagar.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Swara Sagar
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529121&extension=ts&play_token=5l1RvaBfp4|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529133" tvg-logo="https://tvtelugu.pages.dev/logo/T%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", T News
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529133&extension=ts&play_token=cK8En4jPA6|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155846" tvg-logo="https://tvtelugu.pages.dev/logo/Tata%20Play%20Telugu%20Cinema.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Tata Play Telugu Cinema
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155846&extension=ts&play_token=PgjRpoeXyA|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155861" tvg-logo="https://tvtelugu.pages.dev/logo/TV5%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", TV5 News
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155861&extension=ts&play_token=p4rPQBMbpc|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155859" tvg-logo="https://tvtelugu.pages.dev/logo/V6%20News.png" group-title="𝐌𝐚𝐜 𝐓𝐕", V6 News
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155859&extension=ts&play_token=ZmkSs9OP3d|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155871" tvg-logo="https://tvtelugu.pages.dev/logo/Vanitha%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Vanitha TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155871&extension=ts&play_token=Bjlit57uwE|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1529134" tvg-logo="https://tvtelugu.pages.dev/logo/Vissa%20TV.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Vissa TV
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=1529134&extension=ts&play_token=lE0BuR1nnO|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155872" tvg-logo="https://tvtelugu.pages.dev/logo/Zee%20Cinemalu%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Zee Cinemalu HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155872&extension=ts&play_token=ArfPiEMJm3|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="281963" tvg-logo="https://tvtelugu.pages.dev/logo/Zee%20Telugu.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Zee Telugu
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=281963&extension=ts&play_token=gE0imqLR5o|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="155866" tvg-logo="https://tvtelugu.pages.dev/logo/Zee%20Telugu%20HD.png" group-title="𝐌𝐚𝐜 𝐓𝐕", Zee Telugu HD
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:00:3d:1f&stream=155866&extension=ts&play_token=r8ZOxcQDcU|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
