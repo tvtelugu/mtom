@@ -18,7 +18,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install Dependencies
-        run: pip install requests pytz  # <--- CRITICAL FIX
+        run: pip install requests pytz
 
       - name: Run Fetcher
         run: python mactom3u.py
@@ -27,6 +27,6 @@ jobs:
         run: |
           git config --local user.email "bot@tvtelugu.com"
           git config --local user.name "tvtelugu-bot"
-          git add Live.m3u
+          git add Live.m3u Channels.json
           git commit -m "Playlist Updated: $(date)" || echo "No changes"
           git push
