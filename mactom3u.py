@@ -28,16 +28,12 @@ def clean_final_name(name):
     """Strict standardization and targeted renaming."""
     if not name: return ""
 
-    # 1. Standardize Case and Global Typo Fix
     name = re.sub(r'\b(hd|Hd|hD)\b', 'HD', name)
     name = re.sub(r'\b(tv|Tv|tV)\b', 'TV', name)
     name = re.sub(r'\b(fhd|Fhd|FHD|4k|4K)\b', 'HD', name)
     name = re.sub(r'Telegu', 'Telugu', name, flags=re.IGNORECASE)
-    
-    # Remove 'SD' tags to keep names clean
     name = re.sub(r'\b(sd|Sd|SD)\b', '', name).strip()
 
-    # 2. FORCED RENAMES (Strict Branding)
     mapping = {
         r"TV\s*9": "TV9 Telugu",
         r"CINEMANIA HD": "Cine Mania",
@@ -66,7 +62,6 @@ def clean_final_name(name):
         r"Abn Andhra Jyothy": "ABN Andhra Jyothi"
     }
 
-    # 3. DYNAMIC RENAMING (Numbers 1-10 and 2022 to Movies 24/7)
     if re.search(r'Telugu\s*([1-9]|10|2022)', name, re.IGNORECASE):
         return "Telugu Movies 24/7"
 
@@ -86,7 +81,8 @@ def get_json_db():
             name = item.get('Channel Name', '').strip()
             norm = re.sub(r'[^a-z0-9]', '', name.lower())
             db[norm] = {"name": name, "logo": item.get('logo')}
-    except: pass
+    except:
+        pass
     return db
 
 def run_sync():
@@ -121,63 +117,69 @@ def run_sync():
             genre_name = genres.get(ch.get('tv_genre_id'), "")
             
             is_match = re.search(r"(telugu|telegu|cine mania|tv 9|cinemania)", raw_name, re.IGNORECASE) or re.search(r"(telugu|telegu)", genre_name, re.IGNORECASE)
-            if not is_match or any(b in raw_name.lower() for b in BLACKLIST): continue
+            if not is_match or any(b in raw_name.lower() for b in BLACKLIST):
+                continue
 
             cmd = ch.get('cmd', '')
             url_match = re.search(r'http[s]?://[^\s|]+', cmd)
-            if not url_match: continue
+            if not url_match:
+                continue
             stream_url = url_match.group(0)
 
-            if stream_url in seen_streams: continue
+            if stream_url in seen_streams:
+                continue
 
-            # Clean name and apply fixes
             display_name = re.sub(r'(TELUGU|TELEGU|IN-PREM)\s*\|\s*', '', raw_name, flags=re.IGNORECASE).strip()
             display_name = clean_final_name(display_name)
             
-            # --- GROUP LOGIC ---
             target_group = NEW_GROUP_NAME
             if display_name == "Telugu Movies 24/7" or "Cine Mania" in display_name:
                 target_group = MOVIE_GROUP_NAME
 
-            # Logo override logic
             logo = ch.get('logo', '')
             if "24-7.png" in logo or display_name == "Telugu Movies 24/7":
                 logo = "https://tvtelugu.pages.dev/logo/tvtelugu.png"
 
             norm_key = re.sub(r'[^a-z0-9]', '', display_name.lower())
-            
-            # Use JSON DB for strict Branding
             if norm_key in json_db:
                 display_name = json_db[norm_key]['name']
                 logo = json_db[norm_key]['logo']
 
-            # Deduplication: TV9 Telugu working stream will be caught here
             if norm_key in unique_channels and display_name != "Telugu Movies 24/7":
                 continue
 
             print(f"Validating Stream: {display_name}")
             if check_link(stream_url):
-                # Ensure all 24/7 movie streams are added uniquely
+                # 🔥 ONLY CHANGE: extract numeric stream id for tvg-id
+                m = re.search(r'stream=(\d+)', stream_url)
+                tvg_id = m.group(1) if m else ""
+
                 final_key = norm_key if display_name != "Telugu Movies 24/7" else f"{norm_key}_{len(seen_streams)}"
                 
-                entry = (f'#EXTINF:-1 tvg-id="{ch.get("xmltv_id", "")}" '
-                         f'tvg-logo="{logo}" group-title="{target_group}", {display_name}\n'
-                         f'{stream_url}|User-Agent={USER_AGENT}')
+                entry = (
+                    f'#EXTINF:-1 tvg-id="{tvg_id}" '
+                    f'tvg-logo="{logo}" group-title="{target_group}", {display_name}\n'
+                    f'{stream_url}|User-Agent={USER_AGENT}'
+                )
                 
                 unique_channels[final_key] = entry
                 seen_streams.add(stream_url)
 
         if unique_channels:
-            # Final Sorting: Movies Group first, then alphabetically
-            sorted_entries = sorted(unique_channels.values(), key=lambda x: (MOVIE_GROUP_NAME not in x, x.split(",")[-1].strip().lower()))
+            sorted_entries = sorted(
+                unique_channels.values(),
+                key=lambda x: (MOVIE_GROUP_NAME not in x, x.split(",")[-1].strip().lower())
+            )
             with open("Live.m3u", "w", encoding="utf-8") as f:
                 f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n# POWERED BY: {POWERED_BY}\n\n')
                 f.write("\n".join(sorted_entries))
+
             print(f"\n[SUCCESS] Live.m3u created with {len(unique_channels)} channels.")
         else:
             print("[-] No working channels found.")
 
-    except Exception as e: print(f"[-] Error: {e}")
+    except Exception as e:
+        print(f"[-] Error: {e}")
 
 if __name__ == "__main__":
     run_sync()
