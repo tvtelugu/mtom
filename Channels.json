@@ -14,7 +14,7 @@
   "1019924": "Telugu Movies 24/7",
   "155864": "10 TV",
   "1529125": "4tv News",
-  "1529126": "ABN Andhra Jyothi",
+  "1529115": "ABN Andhra Jyothi",
   "1529122": "Aradana TV",
   "155848": "Sony BBC Earth HD",
   "155854": "Bhakti TV",
@@ -33,6 +33,7 @@
   "1529140": "ETV Life",
   "155855": "ETV Plus",
   "155844": "Gemini Comedy",
+  "155850": "Gemini TV HD",
   "155858": "Gemini Life",
   "155851": "Gemini Movies HD",
   "155857": "Gemini Music",
@@ -48,6 +49,7 @@
   "281960": "Star Maa",
   "155847": "National Geographic HD",
   "281962": "Nat Geo Wild HD",
+  "358093": "NTV Telugu",
   "1529117": "Raj Musix Telugu",
   "1529116": "Raj News Telugu",
   "1529135": "Sakshi TV",
@@ -68,6 +70,6 @@
   "1529134": "Vissa TV",
   "155872": "Zee Cinemalu HD",
   "1529141": "Zee Cinemalu",
-  "155866": "Zee Telugu HD",
-  "1529143": "Zee Telugu"
+  "281963": "Zee Telugu",
+  "155866": "Zee Telugu HD"
 }
