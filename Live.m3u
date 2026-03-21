@@ -1,5 +1,9 @@
 #EXTM3U x-tvg-url="https://avkb.short.gy/tsepg.xml.gz"
 # POWERED BY: @tvtelugu
 
-#EXTINF:-1 tvg-id="464855" tvg-logo="https://tvtelugu.pages.dev/logo/TV9%20Telugu.png" group-title="𝐓𝐞𝐥𝐮𝐠𝐮", TV9 Telugu
-http://line.vueott.com:80/play/live.php?mac=00:1A:79:b4:b7:47&stream=464855&extension=ts&play_token=prrUeu33Ao|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1430509" tvg-logo="https://tvtelugu.pages.dev/logo/Cine%20Mania.png" group-title="𝐓𝐞𝐥𝐮𝐠𝐮 | 𝐌𝐨𝐯𝐢𝐞𝐬", Cine Mania
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:b4:b7:47&stream=1430509&extension=ts&play_token=pP8mpn4HPP|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1769933" tvg-logo="https://tvtelugu.pages.dev/logo/TV9%20Telugu.png" group-title="𝐓𝐞𝐥𝐮𝐠𝐮", TV9 Telugu
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:b4:b7:47&stream=1769933&extension=ts&play_token=NhyiEY1OMy|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
+#EXTINF:-1 tvg-id="1019915" tvg-logo="https://tvtelugu.pages.dev/logo/tvtelugu.png" group-title="𝐓𝐞𝐥𝐮𝐠𝐮 | 𝐌𝐨𝐯𝐢𝐞𝐬", Telugu Movies 24/7
+http://line.vueott.com:80/play/live.php?mac=00:1A:79:b4:b7:47&stream=1019915&extension=ts&play_token=q0Ny2T9how|User-Agent=Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3
