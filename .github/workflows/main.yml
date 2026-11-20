@@ -8,14 +8,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: pip install requests pytz
@@ -27,6 +30,18 @@ jobs:
         run: |
           git config --local user.email "bot@tvtelugu.com"
           git config --local user.name "tvtelugu-bot"
-          git add Live.m3u Channels.json
-          git commit -m "Playlist Updated: $(date)" || echo "No changes"
-          git push
+          
+          for file in Live.m3u Channels.json; do
+            if [ -f "$file" ]; then
+              git add "$file"
+            fi
+          done
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Playlist Updated: $(date)"
+          git pull --rebase origin main
+          git push origin main
